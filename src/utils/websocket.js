@@ -1,6 +1,8 @@
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000", {
+const URL_BACKEND = process.env.NEXT_PUBLIC_URL_BACKEND;
+
+const socket = io(URL_BACKEND, {
   withCredentials: true,
 });
 
