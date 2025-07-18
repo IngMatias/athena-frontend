@@ -1,0 +1,20 @@
+.mindMapNode {
+  padding: 1rem;
+
+  background-color: white;
+  border: var(--quinary-border);
+  border-radius: var(--primary-border-radius);
+
+  font: var(--primary-medium-font);
+}
+
+.selected {
+  background-color: var(--tertiary-color);
+  color: white;
+}
+
+.input {
+  width: fit-content;
+
+  font: var(--primary-medium-font);
+}
