@@ -11,9 +11,15 @@ export const redirectLogout = () => {
 };
 
 export const isLoggedIn = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
   return localStorage.getItem("isLoggedIn") === "true";
 };
 
 export const setLoggedIn = (value) => {
+  if (typeof window === "undefined") {
+    return;
+  }
   localStorage.setItem("isLoggedIn", value ? "true" : "false");
 };
