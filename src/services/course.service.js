@@ -1,4 +1,4 @@
-import { del, get, post } from "@/utils/api";
+import { del, get, post, postImage } from "@/utils/api";
 
 const URL_BACKEND = process.env.NEXT_PUBLIC_URL_BACKEND;
 
@@ -67,8 +67,45 @@ export const postCourseDetails = ({
   );
 };
 
+export const postCourseImage = ({ courseId, image }) => {
+  return new Promise((resolve, reject) =>
+    postImage(`${URL_BACKEND}/api/course/image`, { courseId, image })
+      .then(({ data }) => {
+        resolve({ imageUrl: data.imageUrl });
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  );
+};
+
+export const getCourseImage = ({ courseId }) => {
+  return new Promise((resolve, reject) =>
+    get(`${URL_BACKEND}/api/course/image/${courseId}`)
+      .then(({ data }) => {
+        resolve({
+          imageUrl: data.imageUrl,
+        });
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  );
+};
+
+export const getCourseSections = ({ courseId }) => {
+  return new Promise((resolve, reject) =>
+    get(`${URL_BACKEND}/api/course/${courseId}/sections`)
+      .then(({ data }) => {
+        resolve({ sections: data.sections });
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  );
+};
+
 export const postCourseContent = ({ courseId }) => {
-  console.log("courseId", courseId);
   return new Promise((resolve, reject) =>
     post(`${URL_BACKEND}/api/course/${courseId}`, {})
       .then(() => {
@@ -80,7 +117,7 @@ export const postCourseContent = ({ courseId }) => {
   );
 };
 
-export const getTags = ({ contains }) => {
+export const getCourseTags = ({ contains }) => {
   return new Promise((resolve, reject) =>
     get(`${URL_BACKEND}/api/course/tag?contains=${contains}`)
       .then(({ data }) => {
@@ -95,4 +132,40 @@ export const getTags = ({ contains }) => {
         reject(err);
       })
   );
+};
+
+export const getCourseEnrollment = ({ courseId }) => {
+  return new Promise((resolve, reject) => {
+    get(`${URL_BACKEND}/api/course/${courseId}/enrollment`)
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const postCourseEnrollment = ({ courseId }) => {
+  return new Promise((resolve, reject) => {
+    post(`${URL_BACKEND}/api/course/${courseId}/enrollment`, {})
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
+
+export const getCourseContent = ({ courseId, sectionId }) => {
+  return new Promise((resolve, reject) => {
+    get(`${URL_BACKEND}/api/course/${courseId}/section/${sectionId}`)
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
 };

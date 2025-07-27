@@ -1,0 +1,56 @@
+.cardSection {
+  padding: 0 1rem;
+  border-bottom: var(--primary-border);
+}
+
+.cardOpenSection {
+  padding-bottom: 1rem;
+}
+
+.cardBody {
+  display: flex;
+}
+
+.cardBody:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+.buttonCollapseContainer {
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer {
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding: 1rem;
+  width: 100%;
+  border: none;
+  outline: none;
+  color: gray;
+  font: var(--primary-bold-medium-font);
+  text-align: start;
+  background-color: transparent;
+}
+
+.inputLeafContainer .input {
+  color: black;
+  font-weight: normal;
+}
+
+.inputOpenContainer .input {
+  color: black;
+}
+
+.addSectionContainer {
+  padding: 0.5rem;
+  border-top: none;
+  border-radius: 0 0 0.25rem 0.25rem;
+}

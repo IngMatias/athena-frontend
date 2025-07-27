@@ -13,7 +13,8 @@ export const useCreateCoursePath = () => {
 
   const nextPath = {
     "": "/course/[courseId]/details",
-    "/course/[courseId]/details": "/course/[courseId]/tags",
+    "/course/[courseId]/details": "/course/[courseId]/image",
+    "/course/[courseId]/image": "/course/[courseId]/tags",
     "/course/[courseId]/tags": "/course/[courseId]/sections",
     "/course/[courseId]/sections": "/course/[courseId]/section/[sectionId]",
     "/course/[courseId]/section/[sectionId]": "/",

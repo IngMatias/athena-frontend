@@ -14,12 +14,12 @@ export const useViewCoursePath = () => {
   };
 
   const start = (courseId) => {
-
     router.push(denormalizePath(nextPath[""], courseId));
-    
   };
 
-  const next = () => {};
+  const visitSection = ({ sectionId }) => {
+    router.push(`/course/${courseId}/section/${sectionId}/view`);
+  };
 
-  return { start };
+  return { start, visitSection };
 };

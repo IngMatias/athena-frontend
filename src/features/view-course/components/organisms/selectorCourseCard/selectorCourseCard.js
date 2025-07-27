@@ -51,6 +51,7 @@ export default function SelectorCourseCard({
               tags={o.tags}
               title={o.title}
               description={o.description}
+              imageUrl={o.imageUrl}
               onClick={() => onClick(o)}
             >
               {o.label}

@@ -1,10 +1,29 @@
 import React from "react";
 
 import styles from "./courseCard.module.css";
+import Image from "next/image";
 
-export default function CourseCard({ tags, title, description, onClick }) {
+export default function CourseCard({
+  tags,
+  title,
+  description,
+  imageUrl,
+  onClick,
+}) {
   return (
     <button className={styles.courseCard} onClick={onClick}>
+      <div style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+        {imageUrl && (
+          <Image
+            src={imageUrl}
+            alt="Imagen"
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="100vw"
+          />
+        )}
+      </div>
+
       <div className={styles.tags}>
         {tags &&
           tags.map((t) => (

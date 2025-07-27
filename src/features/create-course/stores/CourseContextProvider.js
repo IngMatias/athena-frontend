@@ -6,6 +6,7 @@ import { useContentWebsocket } from "../hooks/useContentWebsocket";
 
 import { socket } from "@/utils/websocket";
 import { useParams } from "next/navigation";
+import { useImage } from "../hooks/useImage";
 
 export const CourseContext = React.createContext({});
 
@@ -43,6 +44,8 @@ export default function CourseContextProvider({ children }) {
     saveDetails,
   } = useDetails();
 
+  const { imagePreview, setImage, saveImage } = useImage();
+
   const {
     sections,
     firstLeaf,
@@ -79,6 +82,9 @@ export default function CourseContextProvider({ children }) {
         titleWordsMax,
         descriptionWordsMax,
         options,
+        imagePreview,
+        setImage,
+        saveImage,
         tags,
         toggleTag,
         contains,

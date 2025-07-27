@@ -21,6 +21,7 @@ export const getCourses = ({ contains }) => {
             id: c.id,
             title: c.courseDetails[0].title,
             description: c.courseDetails[0].description,
+            imageUrl: c.courseDetails[0].imageUrl,
             tags,
           };
         });
@@ -53,6 +54,7 @@ export const getCoursesByUser = () => {
             title: c.courseDetails[0].title,
             description: c.courseDetails[0].description,
             tags,
+            imageUrl: c.courseDetails[0].imageUrl,
           };
         });
 

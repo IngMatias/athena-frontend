@@ -170,3 +170,30 @@ export const postFileAndProgress = (url, file) => {
       reject(err);
     });
 };
+
+export const postImage = (url, image) => {
+  const formData = new FormData();
+  for (let key of Object.keys(image)) {
+    formData.append(key, image[key]);
+  }
+
+  return new Promise((resolve, reject) =>
+    fetch(url, {
+      method: "POST",
+      body: formData,
+      credentials: "include",
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Error ${res.status}: ${res.statusText}`);
+        }
+        return res.json();
+      })
+      .then(({ data }) => {
+        resolve({ data });
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  );
+};

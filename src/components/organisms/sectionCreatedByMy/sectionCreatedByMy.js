@@ -73,6 +73,7 @@ export default function SectionCreatedByMy() {
               tags={c.tags}
               title={c.title}
               description={c.description}
+              imageUrl={c.imageUrl}
               onClick={() => navigateToEditCourse({ courseId: c.id })}
             />
           </div>

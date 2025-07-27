@@ -15,14 +15,6 @@ export const useContentWebsocket = () => {
   const [oldContent, setOldContent] = useState([]);
   const [ids, setIds] = useState([]);
 
-  useEffect(() => {
-    console.log("content", content);
-  }, [content]);
-
-  useEffect(() => {
-    console.log("oldContent", oldContent);
-  }, [oldContent]);
-
   const ExerciseJSONBuffer = useJSONBuffer();
   const KeypointsJSONBuffer = useJSONBuffer();
   const ElaborateMoreJSONBuffer = useJSONBuffer();

@@ -7,8 +7,6 @@ import {
 } from "@/utils/sections";
 import { getAICourseSectionId } from "@/services/ai.course.service";
 
-let i = 0;
-
 export const useSections = () => {
   const [sections, setSections] = useState([]);
   const [openedSections, setOpenedSections] = useState([]);

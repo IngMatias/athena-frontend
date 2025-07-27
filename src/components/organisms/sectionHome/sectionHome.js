@@ -1,10 +1,8 @@
-import CourseCard from "@/features/view-course/components/molecules/courseCard/courseCard";
 import { getCourses } from "@/services/courses.service";
 import React, { useEffect, useState } from "react";
 
 import styles from "./sectionHome.module.css";
 import { useViewCoursePath } from "@/features/view-course/hooks/useViewCoursePath";
-import InputText from "@/features/question/components/atoms/inputText/inputText";
 import SelectorCourseCard from "@/features/view-course/components/organisms/selectorCourseCard/selectorCourseCard";
 
 export default function SectionHome() {

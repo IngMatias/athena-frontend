@@ -1,4 +1,4 @@
-import { getTags } from "@/services/course.service";
+import { getCourseTags } from "@/services/course.service";
 import { useEffect, useState } from "react";
 
 export const useTags = () => {
@@ -14,7 +14,7 @@ export const useTags = () => {
       setOptions([]);
       return;
     }
-    getTags({ contains }).then(({ options }) => {
+    getCourseTags({ contains }).then(({ options }) => {
       if (!options) return;
       const answerIds = tags.map((a) => a.id);
       setOptions(options.filter((o) => !answerIds.includes(o.id)));
