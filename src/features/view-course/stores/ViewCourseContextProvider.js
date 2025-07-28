@@ -1,6 +1,5 @@
 import React from "react";
 import { useDetails } from "@/features/create-course/hooks/useDetails";
-import { useParams } from "next/navigation";
 import { useImage } from "@/features/create-course/hooks/useImage";
 import { useSections } from "../hooks/useSections";
 import { useContent } from "../hooks/useContent";
@@ -15,7 +14,7 @@ export default function ViewCourseContextProvider({ children }) {
   const { sections, firstLeaf, openedSections, toggleSectionOpen } =
     useSections();
 
-  const { content } = useContent();
+  const { content, setAnswerAt, checkAnswerAt } = useContent();
 
   return (
     <ViewCourseContext.Provider
@@ -29,6 +28,8 @@ export default function ViewCourseContextProvider({ children }) {
         openedSections,
         toggleSectionOpen,
         content,
+        setAnswerAt,
+        checkAnswerAt,
       }}
     >
       {children}

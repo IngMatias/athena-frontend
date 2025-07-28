@@ -169,3 +169,18 @@ export const getCourseContent = ({ courseId, sectionId }) => {
       });
   });
 };
+
+export const postAnswer = ({ courseId, sectionId, contentId, answerTry }) => {
+  return new Promise((resolve, reject) => {
+    post(
+      `${URL_BACKEND}/api/course/${courseId}/section/${sectionId}/content/${contentId}`,
+      { answerTry }
+    )
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};
