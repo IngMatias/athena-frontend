@@ -1,7 +1,6 @@
 import React, { useContext, useEffect } from "react";
 
 import styles from "./contentView.module.css";
-import { CourseContext } from "@/features/create-course/stores/CourseContextProvider";
 import { ViewCourseContext } from "@/features/view-course/stores/ViewCourseContextProvider";
 import FollowMouseBox from "@/features/create-course/components/organisms/followMouseBox/followMouseBox";
 import ContentComponent from "../contentComponent/contentComponent";
