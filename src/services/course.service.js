@@ -184,3 +184,17 @@ export const postAnswer = ({ courseId, sectionId, contentId, answerTry }) => {
       });
   });
 };
+
+export const getCertificate = ({ courseId }) => {
+  return new Promise((resolve, reject) => {
+    get(
+      `${URL_BACKEND}/api/course/${courseId}/certificate`
+    )
+      .then(({ data }) => {
+        resolve(data);
+      })
+      .catch((err) => {
+        reject(err);
+      });
+  });
+};

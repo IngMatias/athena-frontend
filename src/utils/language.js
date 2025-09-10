@@ -1,3 +1,3 @@
 export const getBrowserLanguage = () => {
-  return navigator.language.split("-")[0];
+  return navigator?.language?.split("-")[0];
 };

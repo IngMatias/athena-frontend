@@ -28,7 +28,11 @@ export const useSectionsWebsocket = () => {
 
   useEffect(() => {
     if (sections && sectionId) {
-      setPath(findPathById(sections, sectionId));
+      const path = findPathById(sections, sectionId);
+
+      if (path) {
+        setPath(path);
+      }
     }
   }, [sections, sectionId]);
 
@@ -112,7 +116,7 @@ export const useSectionsWebsocket = () => {
   };
 };
 
-const findPathById = (data, targetId) => {
+export const findPathById = (data, targetId) => {
   const stack = data.map((section) => ({
     node: section,
     path: [section.title],

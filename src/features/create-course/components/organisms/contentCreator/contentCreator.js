@@ -5,6 +5,8 @@ import IconTooltip from "../../molecules/iconTooltip/iconTooltip";
 
 import styles from "./contentCreator.module.css";
 import { CourseContext } from "@/features/create-course/stores/CourseContextProvider";
+import { ModalContext } from "@/stores/ModalContextProvider";
+import AddVideoModal from "../addVideoModal/addVideoModal";
 
 export default function ContentCreator() {
   const {
@@ -14,10 +16,13 @@ export default function ContentCreator() {
     elaborateMoreAt,
     setContentAt,
     addEmptyTextAt,
+    addYouTubeVideoAt,
     addExerciseAt,
     addMindMapAt,
     deleteContentAt,
   } = useContext(CourseContext);
+
+  const { open } = useContext(ModalContext);
 
   const handleGenerateKeyPoints = () => {
     addKeypoints(path);
@@ -30,6 +35,13 @@ export default function ContentCreator() {
   const handleAddEmptyText = ({ index }) => {
     addEmptyTextAt(index);
   };
+
+  const handleAddYouTubeVideo = ({index}) => {
+    open(AddVideoModal, {
+          title: "Agregar video de YouTube",
+          handleResult: addYouTubeVideoAt,
+        });
+  }
 
   const handleOnChange = ({ index, content }) => {
     setContentAt(index, content);
@@ -97,6 +109,9 @@ export default function ContentCreator() {
         <IconTooltip onClick={() => handleGenerateKeyPoints()} icon="key">
           Generate <i>keypoints</i> based on title
         </IconTooltip>
+        <IconTooltip onClick={() => handleAddYouTubeVideo({ index: -1 })} icon="key">
+          Add <i>YouTube</i> video
+        </IconTooltip>
       </div>
 
       <div>
@@ -111,6 +126,7 @@ export default function ContentCreator() {
                 onElaborateMore={handleElaborateMore}
                 onAddEmptyText={handleAddEmptyText}
                 onAddTrueFalse={handleAddTrueFalse}
+                onAddYouTubeVideo={handleAddYouTubeVideo}
                 onAddMultipleChoice={handleAddMultipleChoice}
                 onAddMindMap={handleAddMindMap}
               />

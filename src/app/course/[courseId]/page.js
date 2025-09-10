@@ -4,10 +4,10 @@ import ButtonPrimary from "@/components/atoms/buttonPrimary/buttonPrimary";
 import TreeSections from "@/features/view-course/components/organisms/treeSections/treeSections";
 import { useViewCoursePath } from "@/features/view-course/hooks/useViewCoursePath";
 import { ViewCourseContext } from "@/features/view-course/stores/ViewCourseContextProvider";
-import { getCourseEnrollment, postCourseEnrollment } from "@/services/course.service";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import styles from "./styles.module.css";
 
 export default function Home() {
   const params = useParams();
@@ -18,6 +18,8 @@ export default function Home() {
     description,
     imagePreview,
     tags,
+    enrolled,
+    handleEnroll,
     sections,
     firstLeaf,
     openedSections,
@@ -26,26 +28,13 @@ export default function Home() {
 
   const { visitSection } = useViewCoursePath();
 
-  const [enrolled, setEnrolled] = useState(null);
-
-  useEffect(() => {
-    getCourseEnrollment({ courseId }).then((data) => {
-      setEnrolled(data);
-    });
-  }, []);
-
-  const handleEnroll = () => {
-    postCourseEnrollment({ courseId }).then(() => {
-      visitSection({ sectionId: firstLeaf.id });
-    });
-  };
 
   const handleContinue = () => {
     visitSection({ sectionId: firstLeaf.id });
   };
 
   return (
-    <div>
+    <div className="section">
       <div
         style={{ position: "relative", width: "20rem", aspectRatio: "16/9" }}
       >
@@ -71,10 +60,16 @@ export default function Home() {
           />
         </div>
 
-        <div>
-          <div></div>
-
+        <div className={styles.description}>
+          <div className={styles.subtitle} >Resumen</div>
           <div>{description}</div>
+
+          <div className={styles.subtitle}>Habilidades que obtendrás</div>
+          <div className={styles.tags}>{tags.map((t) => (
+            <div key={t.id} className={styles.tag}>
+              {t.label}
+            </div>
+          ))}</div>
 
           <div>
             {!enrolled && (

@@ -113,6 +113,17 @@ export const useContentWebsocket = () => {
       });
     });
 
+    socket.on("add-video-at", (i, url) => {
+      setContent((oldContent) => {
+        const newContent = JSON.parse(JSON.stringify(oldContent));
+        newContent.splice(parseInt(i) + 1, 0, {
+          type: "VIDEO",
+          url: url,
+        });
+        return newContent;
+      });
+    });
+
     socket.on("init-elaborate-more-at", (ids) => {
       ElaborateMoreJSONBuffer.init();
 
@@ -195,6 +206,12 @@ export const useContentWebsocket = () => {
     socket.emit("add-empty-text", courseId, sectionId, i);
   };
 
+  const addYouTubeVideoAt = (i, { url }) => {
+    socket.emit("add-video-at", courseId, sectionId, i, {
+      url
+    });
+  }
+
   const setContentAt = (i, content) => {
     socket.emit("set-content-at", courseId, sectionId, i, content);
   };
@@ -237,6 +254,7 @@ export const useContentWebsocket = () => {
     content,
     setContentAt,
     addEmptyTextAt,
+    addYouTubeVideoAt,
     addKeypoints,
     elaborateMoreAt,
     addExerciseAt,

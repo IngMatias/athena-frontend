@@ -8,6 +8,7 @@ import Header from "@/components/organisms/header/header";
 import { Inter } from "next/font/google";
 
 import "./globals.css";
+import { ToastContextProvider } from "@/features/view-course/stores/ToastContextProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,9 +27,11 @@ export default function RootLayout({ children }) {
         <UserContextProvider>
           <TranslationContextProvider>
             <ModalContextProvider>
+              <ToastContextProvider>
               <Header />
               {children}
               <Modal />
+              </ToastContextProvider>
             </ModalContextProvider>
           </TranslationContextProvider>
         </UserContextProvider>

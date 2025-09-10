@@ -54,3 +54,40 @@
   display: flex;
   justify-content: center;
 }
+
+.completedContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: var(--primary-border-radius);
+  box-shadow: 0 0 0 1px #d1d2e0, 0 2px 4px #06117614, 0 4px 12px #06117614;
+  font: var(--primary-medium-font);
+  text-align: center;
+  background-color: white;
+}
+
+.completedButton {
+  cursor: pointer;
+}
+
+.sections {
+  display: flex;
+  flex-direction: column;
+}
+
+.certificateSection {
+  cursor: pointer;
+  width: 100%;
+  padding: 0.4rem 1.25rem;
+
+  display: flex;
+
+  border: none;
+  outline: none;
+
+  background-color: transparent;
+
+  font: var(--primary-medium-font);
+  text-align: start;
+}

@@ -14,6 +14,7 @@ export default function ContentComponent({
   content,
   onChangeAnswer,
   onCheckAnswer,
+  completed,
 }) {
   const handleChangeAnswer = ({ answer }) => {
     onChangeAnswer({
@@ -63,7 +64,7 @@ export default function ContentComponent({
         )}
         {[ContentType.TRUE_FALSE].includes(content.type) && (
           <div>
-            <button onClick={handleCheck}>Corregir</button>
+            {!completed && !content.result && <button onClick={handleCheck}>Corregir</button>}
             <div>
               {content.result != undefined &&
                 (content.result ? "Correct Answer" : "Wrong Answer")}

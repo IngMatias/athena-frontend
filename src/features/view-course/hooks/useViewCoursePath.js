@@ -17,8 +17,11 @@ export const useViewCoursePath = () => {
     router.push(denormalizePath(nextPath[""], courseId));
   };
 
-  const visitSection = ({ sectionId }) => {
-    router.push(`/course/${courseId}/section/${sectionId}/view`);
+  const visitSection = ({ sectionId, contentId }) => {
+    if (contentId)
+      router.push(`/course/${courseId}/section/${sectionId}/view#${contentId}`);
+    else
+      router.push(`/course/${courseId}/section/${sectionId}/view`);
   };
 
   return { start, visitSection };

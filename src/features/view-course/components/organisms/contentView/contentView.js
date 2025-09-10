@@ -6,7 +6,7 @@ import FollowMouseBox from "@/features/create-course/components/organisms/follow
 import ContentComponent from "../contentComponent/contentComponent";
 
 export default function ContentView() {
-  const { content, setAnswerAt, checkAnswerAt } = useContext(ViewCourseContext);
+  const { enrolled, content, setAnswerAt, checkAnswerAt } = useContext(ViewCourseContext);
 
   const handleOnChangeAnswer = ({ index, answer }) => {
     setAnswerAt(index, answer);
@@ -21,12 +21,13 @@ export default function ContentView() {
       <div>
         {content.map((c, index) => {
           return (
-            <div key={c.id}>
+            <div key={c.id} id={c.id}>
               <ContentComponent
                 index={index}
                 content={c}
                 onChangeAnswer={handleOnChangeAnswer}
                 onCheckAnswer={handleCheckAnswer}
+                completed={enrolled?.completedAt != undefined}
               />
             </div>
           );

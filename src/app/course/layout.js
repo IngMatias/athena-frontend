@@ -5,7 +5,9 @@ import { PanelsContextProvider } from "@/features/create-course/stores/PanelsCon
 export default function RootLayout({ children }) {
   return (
     <CourseContextProvider>
-      <PanelsContextProvider>{children}</PanelsContextProvider>
+      <PanelsContextProvider>
+          {children}
+      </PanelsContextProvider>
     </CourseContextProvider>
   );
 }

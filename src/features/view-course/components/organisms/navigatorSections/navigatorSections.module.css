@@ -1,0 +1,27 @@
+.treeSectionCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionsContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  cursor: pointer;
+  width: 100%;
+  padding: 0.4rem 1.25rem;
+
+  display: flex;
+
+  border: none;
+  outline: none;
+
+  background-color: transparent;
+
+  font: var(--primary-medium-font);
+  text-align: start;
+
+  
+}
