@@ -9,13 +9,3 @@ export const redirectLogin = () => {
 export const redirectLogout = () => {
   window.location.href = `${URL_BACKEND}/api/auth/logout`;
 };
-
-export const isLoggedIn = () => {
-  if (typeof window == "undefined") return;
-  return localStorage.getItem("isLoggedIn") === "true";
-};
-
-export const setLoggedIn = (value) => {
-  if (typeof window == "undefined") return;
-  localStorage.setItem("isLoggedIn", value ? "true" : "false");
-};

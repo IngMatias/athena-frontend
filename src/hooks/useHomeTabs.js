@@ -4,10 +4,11 @@ import SectionHome from "@/components/organisms/sectionHome/sectionHome";
 import SectionCreatedByMy from "@/components/organisms/sectionCreatedByMy/sectionCreatedByMy";
 
 import { TabsType } from "@/enums/TabsType";
-import { isLoggedIn } from "@/utils/login";
+import { UserContext } from "@/stores/UserContextProvider";
 
 export const useHomeTabs = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { user } = useContext(UserContext);
   const tabs = [
     {
       label: "Inicio",
@@ -25,7 +26,7 @@ export const useHomeTabs = () => {
       onClick: (i) => {
         setActiveIndex(i);
       },
-      show: isLoggedIn(),
+      show: user,
     },
   ];
 
