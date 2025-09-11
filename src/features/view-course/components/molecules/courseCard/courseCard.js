@@ -20,6 +20,7 @@ export default function CourseCard({
             fill
             style={{ objectFit: "cover" }}
             sizes="100vw"
+            unoptimized
           />
         )}
       </div>

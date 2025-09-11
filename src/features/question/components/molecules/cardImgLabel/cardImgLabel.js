@@ -11,7 +11,7 @@ export default function CardImgLabel({ name, label, src, selected, onClick }) {
         <input className={styles.input} type="radio" name={name} checked={selected} onChange={onClick} />
 
         <div className={styles.img}>
-          <Image src={src} width={133} height={133} alt={label} />
+          <Image src={src} width={133} height={133} alt={label} unoptimized />
         </div>
 
         <div className={styles.labelText}>{label}</div>

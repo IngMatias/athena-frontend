@@ -45,6 +45,7 @@ export default function Home() {
             fill
             style={{ objectFit: "cover" }}
             sizes="100vw"
+            unoptimized
           />
         )}
       </div>

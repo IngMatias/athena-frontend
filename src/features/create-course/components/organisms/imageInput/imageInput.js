@@ -22,6 +22,7 @@ export default function ImageInput() {
             fill
             style={{ objectFit: "cover" }}
             sizes="100vw"
+            unoptimized
           />
         )}
       </div>
