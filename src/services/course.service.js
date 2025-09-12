@@ -84,7 +84,7 @@ export const getCourseImage = ({ courseId }) => {
     get(`${URL_BACKEND}/api/course/image/${courseId}`)
       .then(({ data }) => {
         resolve({
-          imageUrl: data.imageUrl,
+          imageUrl: `${URL_BACKEND}/api/${data.imageUrl}`,
         });
       })
       .catch((err) => {

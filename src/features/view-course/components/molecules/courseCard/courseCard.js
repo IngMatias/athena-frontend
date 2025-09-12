@@ -10,6 +10,8 @@ export default function CourseCard({
   imageUrl,
   onClick,
 }) {
+  console.log("title", title, imageUrl);
+
   return (
     <button className={styles.courseCard} onClick={onClick}>
       <div style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
