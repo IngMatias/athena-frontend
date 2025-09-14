@@ -201,7 +201,6 @@ export const useContentWebsocket = () => {
   }, []);
 
   const addEmptyTextAt = (i) => {
-    console.log("click");
     socket.emit("add-empty-text", courseId, sectionId, i);
   };
 

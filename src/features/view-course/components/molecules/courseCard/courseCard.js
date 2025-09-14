@@ -10,7 +10,6 @@ export default function CourseCard({
   imageUrl,
   onClick,
 }) {
-  console.log("title", title, imageUrl);
 
   return (
     <button className={styles.courseCard} onClick={onClick}>

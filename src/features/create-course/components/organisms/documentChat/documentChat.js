@@ -21,10 +21,6 @@ export default function DocumentChat() {
   const [filesIds, setFilesIds] = useState([]);
 
   useEffect(() => {
-    console.log("filesIds", filesIds);
-  }, [filesIds]);
-
-  useEffect(() => {
     getIAChatDocument().then(({ files }) => {
       setFilesIds(files.map((f) => f.id));
     });

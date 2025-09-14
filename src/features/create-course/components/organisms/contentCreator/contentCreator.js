@@ -90,7 +90,6 @@ export default function ContentCreator() {
       }
     );
     if (!selectionElement?.dataset?.index) {
-      console.log("scroll");
       window.scrollTo({
         top: document.documentElement.scrollHeight,
         behavior: "smooth",

@@ -9,10 +9,6 @@ export const useContent = () => {
   const [content, setContent] = useState([]);
 
   useEffect(() => {
-    console.log(content);
-  }, [content]);
-
-  useEffect(() => {
     if (!courseId || !sectionId) return;
     getCourseContent({ courseId, sectionId }).then(({ content }) => {
       setContent(content);

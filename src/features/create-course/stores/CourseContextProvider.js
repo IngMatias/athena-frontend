@@ -18,7 +18,7 @@ export default function CourseContextProvider({ children }) {
     socket.emit("join-participants", courseId);
 
     socket.on("set-participants", (participants) => {
-      // console.log("participants", participants);
+
     });
 
     socket.on("error", (err) => {

@@ -36,7 +36,6 @@ export default function DocumentHandler({ setFilesIds }) {
       if (e.target.checked) {
         newFilesIds.push(id);
       }
-      console.log(newFilesIds);
       return newFilesIds;
     });
   };
