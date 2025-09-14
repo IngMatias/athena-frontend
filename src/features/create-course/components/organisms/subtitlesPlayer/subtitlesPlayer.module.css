@@ -1,0 +1,18 @@
+.subtitlesPlayer { 
+  display: flex; 
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.stickyVideo {
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.videoTitle {
+  padding: 0.5rem;
+  font: var(--primary-bold-medium-font);
+  text-align: center;
+}

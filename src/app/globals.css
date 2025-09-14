@@ -21,6 +21,8 @@ body {
 
   --tertiary-background-color: #00000012;
   --tertiary-color: #a569dc;
+  --tertiary-hover-color: #e2e3ec;
+
   --quaternary-color: #cc0000;
 
   --modal-primary-background-color: rgba(0, 0, 0, 0.5);

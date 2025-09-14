@@ -14,6 +14,7 @@ import Breadcrumb from "@/features/create-course/components/molecules/breadcrumb
 import styles from "./styles.module.css";
 import ButtonPrimary from "@/components/atoms/buttonPrimary/buttonPrimary";
 import ContentCreator from "@/features/create-course/components/organisms/contentCreator/contentCreator";
+import YoutubeStudioTab from "@/features/create-course/components/organisms/youtubeStudioTab/youTubeStudioTab";
 
 export default function CourseContent() {
   const { next, prev, visitSection } = useCreateCoursePath();
@@ -66,7 +67,7 @@ export default function CourseContent() {
 
               <div>
                 <div>YouTube Studio</div>
-                <div></div>
+                <YoutubeStudioTab></YoutubeStudioTab>
               </div>
             </TabPanel>
           </div>
