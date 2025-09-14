@@ -38,16 +38,5 @@ export const useFollowMousePosition = (div) => {
     setShowPopup(!selectionIsEmpty);
   }, [selectionIsEmpty]);
 
-  useEffect(() => {
-    window.addEventListener("click", handleClick);
-    return () => {
-      window.removeEventListener("click", handleClick);
-    };
-  }, []);
-
-  const handleClick = (e) => {
-    if (selectionIsEmpty || e.target.tagName === "BUTTON") setShowPopup(false);
-  };
-
   return { showPopup, followMousePosition };
 };

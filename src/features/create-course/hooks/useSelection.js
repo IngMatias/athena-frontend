@@ -3,11 +3,7 @@ import { useEffect, useState } from "react";
 export const useSelection = () => {
   const [selection, setSelection] = useState("");
   const [selectionElement, setSelectionElement] = useState(null);
-  const [selectionIsEmpty, setSelectionIsEmpty] = useState(false);
-
-  useEffect(() => {
-    setSelectionIsEmpty(selection.trim().length === 0);
-  }, [selection]);
+  const selectionIsEmpty = selection.trim().length === 0;
 
   const handleSelectChange = () => {
     const selection = window.getSelection();
