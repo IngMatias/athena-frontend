@@ -13,6 +13,7 @@ export const useContent = () => {
   }, [content]);
 
   useEffect(() => {
+    if (!courseId || !sectionId) return;
     getCourseContent({ courseId, sectionId }).then(({ content }) => {
       setContent(content);
     });

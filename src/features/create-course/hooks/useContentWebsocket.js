@@ -47,7 +47,6 @@ export const useContentWebsocket = () => {
       });
     });
 
-    // Develop here
     socket.on("init-add-mind-map-at", (ids) => {
       MindMapJSONBuffer.init();
 

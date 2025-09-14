@@ -84,7 +84,7 @@ export const getCourseImage = ({ courseId }) => {
     get(`${URL_BACKEND}/api/course/image/${courseId}`)
       .then(({ data }) => {
         resolve({
-          imageUrl: `${URL_BACKEND}/api/${data.imageUrl}`,
+          imageUrl: data.imageUrl ? `${URL_BACKEND}/api/${data.imageUrl}` : "",
         });
       })
       .catch((err) => {
@@ -187,9 +187,7 @@ export const postAnswer = ({ courseId, sectionId, contentId, answerTry }) => {
 
 export const getCertificate = ({ courseId }) => {
   return new Promise((resolve, reject) => {
-    get(
-      `${URL_BACKEND}/api/course/${courseId}/certificate`
-    )
+    get(`${URL_BACKEND}/api/course/${courseId}/certificate`)
       .then(({ data }) => {
         resolve(data);
       })

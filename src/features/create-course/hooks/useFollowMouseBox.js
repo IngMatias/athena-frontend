@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useMousePosition } from "./useMousePosition";
-import { useSelection } from "./useSelection";
+import { SelectionContext } from "../stores/SelectionContextProvider";
 
 export const useFollowMousePosition = (div) => {
   const [followMousePosition, setFollowMousePosition] = useState({
@@ -25,15 +25,14 @@ export const useFollowMousePosition = (div) => {
     const maxX = windowWidth - divWidth;
     const maxY = windowHeight - divHeight;
 
-    const x = Math.min(Math.max(mouseX + 30, 10), maxX - 10);
-    const y = Math.min(Math.max(mouseY - divHeight - 30, 10), maxY - 10);
+    const x = Math.min(Math.max(mouseX, 10), maxX - 10);
+    const y = Math.min(Math.max(mouseY - divHeight + 50, 10), maxY - 10);
 
     setFollowMousePosition({ x, y });
   }, [mousePosition, div]);
 
-  //
   const [showPopup, setShowPopup] = useState(false);
-  const { selectionIsEmpty } = useSelection();
+  const { selectionIsEmpty } = useContext(SelectionContext);
 
   useEffect(() => {
     setShowPopup(!selectionIsEmpty);

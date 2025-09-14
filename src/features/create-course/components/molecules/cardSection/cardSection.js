@@ -35,12 +35,14 @@ export default function CardSection({
             </div>
           )}
           <div
-            className={`${styles.inputContainer} ${isLeaf ? styles.inputLeafContainer : ""} ${isOpen ? styles.inputOpenContainer : ""}`}
+            className={`${styles.inputContainer} ${
+              isLeaf ? styles.inputLeafContainer : ""
+            } ${isOpen ? styles.inputOpenContainer : ""}`}
           >
             <input
               className={styles.input}
               type="text"
-              value={section.title}
+              value={section.title || ""}
               onChange={(e) => onTitleChange(currentPath, e.target.value)}
             />
           </div>

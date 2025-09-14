@@ -7,6 +7,7 @@ import styles from "./contentCreator.module.css";
 import { CourseContext } from "@/features/create-course/stores/CourseContextProvider";
 import { ModalContext } from "@/stores/ModalContextProvider";
 import AddVideoModal from "../addVideoModal/addVideoModal";
+import { SelectionContext } from "@/features/create-course/stores/SelectionContextProvider";
 
 export default function ContentCreator() {
   const {
@@ -22,6 +23,8 @@ export default function ContentCreator() {
     deleteContentAt,
   } = useContext(CourseContext);
 
+  const { selection, selectionElement } = useContext(SelectionContext);
+
   const { open } = useContext(ModalContext);
 
   const handleGenerateKeyPoints = () => {
@@ -36,12 +39,12 @@ export default function ContentCreator() {
     addEmptyTextAt(index);
   };
 
-  const handleAddYouTubeVideo = ({index}) => {
+  const handleAddYouTubeVideo = ({ index }) => {
     open(AddVideoModal, {
-          title: "Agregar video de YouTube",
-          handleResult: addYouTubeVideoAt,
-        });
-  }
+      title: "Agregar video de YouTube",
+      handleResult: addYouTubeVideoAt,
+    });
+  };
 
   const handleOnChange = ({ index, content }) => {
     setContentAt(index, content);
@@ -52,24 +55,47 @@ export default function ContentCreator() {
   };
 
   const handleAddTrueFalseWithSelected = (e) => {
-    addExerciseAt(selectionElement.dataset.index, {
-      numberOfExercises: 3,
-      type: "TRUE_FALSE",
-      difficulty: "MEDIUM",
-      text: selection,
-      language: "en_US",
-    });
+    addExerciseAt(
+      selectionElement?.dataset?.index
+        ? selectionElement.dataset.index
+        : content.length,
+      {
+        numberOfExercises: 3,
+        type: "TRUE_FALSE",
+        difficulty: "MEDIUM",
+        text: selection,
+        language: "en_US",
+      }
+    );
+    if (!selectionElement?.dataset?.index) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleAddMultipleChoiceWithSelected = (e) => {
-    addExerciseAt(selectionElement.dataset.index, {
-      numberOfExercises: 3,
-      type: "MULTIPLE_CHOICE",
-      difficulty: "MEDIUM",
-      text: selection,
-      numberOfOptions: 5,
-      language: "en_US",
-    });
+    addExerciseAt(
+      selectionElement?.dataset?.index
+        ? selectionElement.dataset.index
+        : content.length,
+      {
+        numberOfExercises: 3,
+        type: "MULTIPLE_CHOICE",
+        difficulty: "MEDIUM",
+        text: selection,
+        numberOfOptions: 5,
+        language: "en_US",
+      }
+    );
+    if (!selectionElement?.dataset?.index) {
+      console.log("scroll");
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   };
 
   const handleAddTrueFalse = ({ index }) => {
@@ -109,7 +135,10 @@ export default function ContentCreator() {
         <IconTooltip onClick={() => handleGenerateKeyPoints()} icon="key">
           Generate <i>keypoints</i> based on title
         </IconTooltip>
-        <IconTooltip onClick={() => handleAddYouTubeVideo({ index: -1 })} icon="key">
+        <IconTooltip
+          onClick={() => handleAddYouTubeVideo({ index: -1 })}
+          icon="key"
+        >
           Add <i>YouTube</i> video
         </IconTooltip>
       </div>

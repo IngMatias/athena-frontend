@@ -9,6 +9,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { ToastContextProvider } from "@/features/view-course/stores/ToastContextProvider";
+import { SelectionContextProvider } from "@/features/create-course/stores/SelectionContextProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -28,9 +29,11 @@ export default function RootLayout({ children }) {
           <TranslationContextProvider>
             <ModalContextProvider>
               <ToastContextProvider>
-              <Header />
-              {children}
-              <Modal />
+                <SelectionContextProvider>
+                  <Header />
+                  {children}
+                  <Modal />
+                </SelectionContextProvider>
               </ToastContextProvider>
             </ModalContextProvider>
           </TranslationContextProvider>
