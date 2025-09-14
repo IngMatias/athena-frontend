@@ -1,12 +1,14 @@
 import {
   deleteIAChatDocument,
   getIAChatDocument,
+  postChatSelectedDocument,
   postIAChatDocument,
 } from "@/services/ai.chat.service";
 import React, { useEffect, useState } from "react";
 
 import styles from "./documentHandler.module.css";
 import ButtonPrimary from "@/components/atoms/buttonPrimary/buttonPrimary";
+import { useParams } from "next/navigation";
 
 const LoadingStates = {
   SPLITTING_FILES: "SPLITTING FILES",
@@ -14,29 +16,35 @@ const LoadingStates = {
   FINISHED: "FINISHED",
 };
 
-export default function DocumentHandler({ setFilesIds }) {
+export default function DocumentHandler({ setFiles: setParentFiles }) {
+  const params = useParams();
+  const { courseId } = params;
+
   const [files, setFiles] = useState([]);
   const [file, setFile] = useState(null);
 
   useEffect(() => {
-    setFilesIds(files.map((f) => f.id));
-  }, [files]);
-
-  useEffect(() => {
-    getIAChatDocument().then(({ files }) => {
+    getIAChatDocument({ courseId }).then(({ files }) => {
       setFiles(files);
     });
   }, []);
 
   const handleSelectFile = (e, { id }) => {
-    setFilesIds((oldFilesIds) => {
-      let newFilesIds = JSON.parse(JSON.stringify(oldFilesIds)).filter(
-        (i) => i != id
-      );
-      if (e.target.checked) {
-        newFilesIds.push(id);
-      }
-      return newFilesIds;
+    const selected = e.target.checked;
+    postChatSelectedDocument({
+      courseId,
+      fileId: id,
+      selected,
+    }).then(({ fileId }) => {
+      setParentFiles((oldFiles) => {
+        let newFiles = JSON.parse(JSON.stringify(oldFiles));
+        for (let f of newFiles) {
+          if (f.id === fileId) {
+            f.selected = selected;
+          }
+        }
+        return newFiles;
+      });
     });
   };
 
@@ -46,6 +54,7 @@ export default function DocumentHandler({ setFilesIds }) {
 
   const handleSend = async () => {
     postIAChatDocument({
+      courseId,
       file,
       onChunk: ({ process, progress, fileId, fileName }) => {
         setFiles((oldFiles) => {
@@ -54,13 +63,19 @@ export default function DocumentHandler({ setFilesIds }) {
           const newFiles = oldFiles.map((file) => {
             if (file.fileId === fileId) {
               found = true;
-              return { process, progress, fileId, fileName };
+              return { process, progress, fileId, fileName, selected: true };
             }
             return file;
           });
 
           if (!found) {
-            newFiles.push({ process, progress, fileId, fileName });
+            newFiles.push({
+              process,
+              progress,
+              fileId,
+              fileName,
+              selected: true,
+            });
           }
 
           return newFiles;
@@ -90,7 +105,11 @@ export default function DocumentHandler({ setFilesIds }) {
             }}
           >
             <div className={styles.left}>
-              <input type="checkbox" onChange={(e) => handleSelectFile(e, f)} />
+              <input
+                type="checkbox"
+                onChange={(e) => handleSelectFile(e, f)}
+                defaultChecked={f.selected}
+              />
               <div className={styles.fileName}>{f.fileName}</div>
             </div>
 

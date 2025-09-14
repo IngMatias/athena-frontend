@@ -45,9 +45,9 @@ export const postChatDocuments = ({ filesIds, message, onChunk }) => {
   });
 };
 
-export const getIAChatDocument = () => {
+export const getIAChatDocument = ({ courseId }) => {
   return new Promise((resolve, reject) => {
-    get(`${URL_BACKEND}/api/ai/chat/document`)
+    get(`${URL_BACKEND}/api/ai/chat/document/${courseId}`)
       .then(({ data }) => {
         const { files } = data;
         resolve({ files });
@@ -58,9 +58,25 @@ export const getIAChatDocument = () => {
   });
 };
 
-export const postIAChatDocument = ({ file, onChunk }) => {
+export const postChatSelectedDocument = ({ courseId, fileId, selected }) => {
+  return new Promise((resolve, reject) =>
+    post(`${URL_BACKEND}/api/ai/chat/document/selected`, {
+      courseId,
+      fileId,
+      selected,
+    })
+      .then(({ data }) => {
+        resolve({ fileId: data.fileId });
+      })
+      .catch((err) => {
+        reject(err);
+      })
+  );
+};
+
+export const postIAChatDocument = ({ courseId, file, onChunk }) => {
   return new Promise((resolve, reject) => {
-    postFileAndProgress(`${URL_BACKEND}/api/ai/chat/document`, file)
+    postFileAndProgress(`${URL_BACKEND}/api/ai/chat/document`, courseId, file)
       .then(async (res) => {
         for await (const chunk of res) {
           onChunk(chunk);

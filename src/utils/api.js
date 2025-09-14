@@ -136,9 +136,10 @@ export const postAndStream = (url, body) => {
     });
 };
 
-export const postFileAndProgress = (url, file) => {
+export const postFileAndProgress = (url, courseId, file) => {
   const formData = new FormData();
   formData.append("file", file);
+  formData.append("courseId", courseId);
 
   return fetch(url, {
     method: "POST",

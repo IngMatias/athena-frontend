@@ -7,6 +7,7 @@ import DocumentModal from "../documentHandler/documentHandler";
 
 import { getIAChatDocument } from "@/services/ai.chat.service";
 import ReferencesModal from "../referencesModal/referencesModal";
+import { useParams } from "next/navigation";
 
 const CHAT_ROLE = {
   user: "user",
@@ -14,20 +15,23 @@ const CHAT_ROLE = {
 };
 
 export default function DocumentChat() {
+  const params = useParams();
+  const { courseId } = params;
+
   const { open } = useContext(ModalContext);
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
-  const [filesIds, setFilesIds] = useState([]);
+  const [files, setFiles] = useState([]);
 
   useEffect(() => {
-    getIAChatDocument().then(({ files }) => {
-      setFilesIds(files.map((f) => f.id));
+    getIAChatDocument({ courseId }).then(({ files }) => {
+      setFiles(files);
     });
   }, []);
 
   const handleFile = () => {
-    open(DocumentModal, { setFilesIds });
+    open(DocumentModal, { files, setFiles });
   };
 
   const handleReferences = (message) => {
@@ -46,7 +50,7 @@ export default function DocumentChat() {
 
     setMessage((message) => {
       postChatDocuments({
-        filesIds,
+        filesIds: files.filter((f) => f.selected).map((f) => f.id),
         message,
         onChunk: (chunk) => {
           const { done } = chunk;
@@ -90,7 +94,9 @@ export default function DocumentChat() {
               className={
                 styles.message +
                 (m.role === CHAT_ROLE.user ? ` ${styles.userMessage}` : "") +
-                (m.role === CHAT_ROLE.assistant ? ` ${styles.assistantMessage}` : "")
+                (m.role === CHAT_ROLE.assistant
+                  ? ` ${styles.assistantMessage}`
+                  : "")
               }
             >
               {m.content}
