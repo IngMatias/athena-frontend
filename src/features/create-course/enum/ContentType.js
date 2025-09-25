@@ -1,5 +1,6 @@
 export const ContentType = {
   TEXT: "TEXT",
+  VIDEO: "VIDEO",
   MINDMAP: "MINDMAP",
   TRUE_FALSE: "TRUE_FALSE",
   MULTPLE_CHOICE: "MULTIPLE_CHOICE",

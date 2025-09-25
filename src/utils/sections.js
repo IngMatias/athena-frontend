@@ -49,3 +49,33 @@ export const changeTitleSections = (oldSections, path, newTitle) => {
   node[path[path.length - 1]].title = newTitle;
   return newSections;
 };
+
+
+export const findSectionPath = (nodes, sectionId, path = []) => {
+  for (const node of nodes) {
+    const newPath = [...path, node];
+    if (node.id === sectionId) {
+      return newPath;
+    }
+    if (node.sections) {
+      const found = findSectionPath(node.sections, sectionId, newPath);
+      if (found.length) return found; 
+    }
+  }
+  return []; 
+};
+
+export const updateCompleted = (tree, sectionId, increment = 1) => {
+  const path = findSectionPath(tree, sectionId);
+
+  if (!path.length) {
+    console.warn("No se encontró la sección con id:", sectionId);
+    return tree;
+  }
+
+  path.forEach(node => {
+    node.completed = (node.completed || 0) + increment;
+  });
+
+  return tree;
+};

@@ -61,18 +61,24 @@ export default function DocumentHandler({ setFiles: setParentFiles }) {
           let found = false;
 
           const newFiles = oldFiles.map((file) => {
-            if (file.fileId === fileId) {
+            if (file.id === fileId) {
               found = true;
-              return { process, progress, fileId, fileName, selected: true };
+              return { process, progress, id: fileId, fileName, selected: true };
             }
             return file;
           });
+
+          if (LoadingStates[process] === LoadingStates.FINISHED) {
+            setParentFiles((oldParentFiles) => {
+              return JSON.parse(JSON.stringify(newFiles))
+            });
+          }
 
           if (!found) {
             newFiles.push({
               process,
               progress,
-              fileId,
+              id: fileId,
               fileName,
               selected: true,
             });
@@ -143,7 +149,7 @@ export default function DocumentHandler({ setFiles: setParentFiles }) {
           type="file"
           onChange={handleUpload}
         />
-        <ButtonPrimary label="Load File" onClick={handleSend} />
+        <ButtonPrimary label="Cargar archivo" onClick={handleSend} />
       </div>
     </div>
   );

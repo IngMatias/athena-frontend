@@ -51,7 +51,7 @@ export default function CourseContent() {
           <div className={`${styles.panel} ${styles.leftPanel}`}>
             <TabPanel>
               <div>
-                <div>Navigation</div>
+                <div>Contenido</div>
                 <NavigatorSections
                   sections={sections}
                   path={[]}
@@ -87,14 +87,13 @@ export default function CourseContent() {
           <div className={`${styles.panel} ${styles.rightPanel}`}>
             <TabPanel>
               <div>
-                <div>Open Chat</div>
-                <SimpleChat></SimpleChat>
-              </div>
-
-              <div>
-                <div>Document Chat</div>
+                <div>Asistente Virtual con Documentos</div>
                 <DocumentChat></DocumentChat>
               </div>
+              <div>
+                <div>Asistente Virtual</div>
+                <SimpleChat></SimpleChat>
+              </div>    
             </TabPanel>
           </div>
         </div>

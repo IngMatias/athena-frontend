@@ -40,10 +40,7 @@ export default function ContentCreator() {
   };
 
   const handleAddYouTubeVideo = ({ index }) => {
-    open(AddVideoModal, {
-      title: "Agregar video de YouTube",
-      handleResult: addYouTubeVideoAt,
-    });
+    addYouTubeVideoAt(index);
   };
 
   const handleOnChange = ({ index, content }) => {
@@ -136,7 +133,7 @@ export default function ContentCreator() {
         </IconTooltip>
         <IconTooltip
           onClick={() => handleAddYouTubeVideo({ index: -1 })}
-          icon="key"
+          icon="youtube_activity"
         >
           Add <i>YouTube</i> video
         </IconTooltip>

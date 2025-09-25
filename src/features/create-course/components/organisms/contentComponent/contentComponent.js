@@ -9,6 +9,7 @@ import ButtonIcon from "../../atoms/buttonIcon/buttonIcon";
 
 import styles from "./contentComponent.module.css";
 import MindMapContent from "../../atoms/mindMapContent/mindMapContent";
+import VideoContent from "../../molecules/videoContent/videoContent";
 
 export default function ContentComponent({
   index,
@@ -73,6 +74,13 @@ export default function ContentComponent({
       <div>
         {content.type === ContentType.TEXT && (
           <TextInputContent
+            id={content.id}
+            text={content.text}
+            onChange={handleChange}
+          />
+        )}
+        {content.type === ContentType.VIDEO && (
+          <VideoContent
             id={content.id}
             text={content.text}
             onChange={handleChange}

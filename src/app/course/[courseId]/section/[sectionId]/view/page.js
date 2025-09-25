@@ -10,21 +10,36 @@ import { useContext } from "react";
 import { useViewCoursePath } from "@/features/view-course/hooks/useViewCoursePath";
 import { ViewCourseContext } from "@/features/view-course/stores/ViewCourseContextProvider";
 import NavigatorSections from "@/features/view-course/components/organisms/navigatorSections/navigatorSections";
-import CertificateContentView from "@/features/view-course/components/organisms/certificateContentView/certificateContentView";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { formatDateToDDMMAAAAA } from "@/utils/date";
+import ButtonPrimary from "@/components/atoms/buttonPrimary/buttonPrimary";
+import ButtonLink from "@/components/atoms/buttonLink/buttonLink";
 
 export default function Page() {
   const { visitSection } = useViewCoursePath();
+  const router = useRouter();
 
-  const { sectionId } = useParams();
+  const { courseId, sectionId } = useParams();
 
-  const { enrolled, sections, path, openedSections, toggleSectionOpen } =
+  const { checkCertificate, completed, enrolled, sections, path, openedSections, toggleSectionOpen } =
     useContext(ViewCourseContext);
 
   const handleSelectSection = (sectionId) => {
     visitSection({ sectionId });
   };
+
+  const handleGoToHome =() => {
+    router.push(`/`);
+  }
+
+  const handleGetCertificate = () => {
+    checkCertificate();
+    handleGoToCertificate();
+  }
+
+  const handleGoToCertificate = () => {
+    router.push(`/course/${courseId}/certificate`);
+  }
 
   return (
     <div className="section">
@@ -33,7 +48,7 @@ export default function Page() {
           <div className={`${styles.panel} ${styles.leftPanel}`}>
             <TabPanel>
               <div>
-                <div>Navigation</div>
+                <div>Contenido</div>
                 <div className={styles.sections}>
                   <NavigatorSections
                     sections={sections}
@@ -43,47 +58,52 @@ export default function Page() {
                     onToggleCollapse={toggleSectionOpen}
                     onSelectSection={handleSelectSection}
                   />
-                  { !enrolled?.completedAt && <button
-                    className={styles.certificateSection}
-                    onClick={() => handleSelectSection("get-certificate")}
-                  >
-                    Obtener Certificado
-                  </button> }
                 </div>
               </div>
             </TabPanel>
           </div>
           
           { enrolled?.completedAt && (<div className={styles.completedContainer}>
-            Ya has completado este curso! El {formatDateToDDMMAAAAA(enrolled.completedAt)}. 
-            <a className={styles.completedButton} onClick={handleSelectSection}>Volver al panel del curso.</a>
+            Ya completaste este curso! <button className={styles.completedButton} onClick={handleGoToHome}>Volver al inicio.</button>
             </div>) }
 
-          {!enrolled?.completedAt && sectionId == "get-certificate" ? (
-            <CertificateContentView></CertificateContentView>
-          ) : (
-            <>
-              <div className={styles.header}>
-                <div className={styles.titleContainer}>
-                  <h1>{path[path.length - 1]}</h1>
-                </div>
+          <div className={styles.header}>
+            <div className={styles.titleContainer}>
+              <h1>{path[path.length - 1]}</h1>
+            </div>
 
-                <div className={styles.breadcrumbContainer}>
-                  <Breadcrumb path={path} />
-                </div>
-              </div>
-              <ContentView />
-            </>
-          )}
+            <div className={styles.breadcrumbContainer}>
+              <Breadcrumb path={path} />
+            </div>
+          </div>
+          <ContentView />
+
           <div className={`${styles.panel} ${styles.rightPanel}`}>
             <TabPanel>
               <div>
-                <div>Chat</div>
+                <div>Asistente Virtual con Documentos</div>
+                <DocumentChat allowLoading={false}></DocumentChat>
+              </div>
+              <div>
+                <div>Asistente Virtual</div>
                 <SimpleChat></SimpleChat>
               </div>
             </TabPanel>
           </div>
         </div>
+        { (enrolled?.completedAt || completed) && 
+          <div className="section-actions">
+            <div>
+              <div></div>
+              { enrolled?.completedAt && (
+                <ButtonPrimary label="Ver Certificado" onClick={handleGoToCertificate} />
+              )}
+              { !enrolled?.completedAt && (
+                <ButtonPrimary label="Obtener Certificado" onClick={handleGetCertificate} />
+              )}
+            </div>
+          </div>
+        }
       </div>
     </div>
   );

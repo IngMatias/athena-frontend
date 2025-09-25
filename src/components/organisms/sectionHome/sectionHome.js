@@ -24,14 +24,14 @@ export default function SectionHome() {
   return (
     <div className={styles.sectionHome}>
       <SelectorCourseCard
-        label="Find your course"
+        label="Busca tu curso"
         options={courses}
-        placeholder="Find your course"
+        placeholder="Busca tu curso"
         onClick={navigateToCourse}
         onFilter={setContains}
         onMoreOption={() => {}}
-        createLabel="Add new course"
-        moreLabel="More Courses"
+        createLabel="Agregar un nuevo curso"
+        moreLabel="Más cursos"
       />
     </div>
   );

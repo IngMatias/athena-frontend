@@ -8,6 +8,7 @@ export const useSections = () => {
   const params = useParams();
   const { courseId, sectionId } = params;
   const [path, setPath] = useState([]);
+  const [completed, setCompleted] = useState([]);
 
   const {
     sections,
@@ -28,16 +29,32 @@ export const useSections = () => {
   }, [sections, sectionId]);
 
   useEffect(() => {
+    const excCompleted = sections.reduce((acc, section) => acc + section.completed, 0);
+    const excTotal = sections.reduce((acc, section) => acc + section.total, 0);
+    
+    setCompleted(excCompleted == excTotal)
+
+  }, [sections])
+
+  const addCompletedExc = () => {
+    console.log('sectionId', sectionId)
+    console.log('sections', sections)
+  }
+
+  useEffect(() => {
     getCourseSections({ courseId }).then(({ sections }) => {
       setSections(sections);
     });
   }, [courseId]);
 
   return {
+    completed,
     sections,
+    setSections,
     firstLeaf,
     path,
     openedSections,
     toggleSectionOpen,
+    addCompletedExc
   };
 };

@@ -15,12 +15,12 @@ export default function ViewCourseContextProvider({ children }) {
 
   const { enrolled, handleEnroll } = useEnrollment();
 
-  const { sections, firstLeaf, path, openedSections, toggleSectionOpen } =
+  const { completed, sections, setSections, firstLeaf, path, openedSections, toggleSectionOpen } =
     useSections();
 
-  const { content, setAnswerAt, checkAnswerAt } = useContent();
+  const { content, setAnswerAt, checkAnswerAt } = useContent({setSections, path});
 
-  const { checkCertificate } = useCertificate();
+  const { checkCertificate } = useCertificate(); 
 
   return (
     <ViewCourseContext.Provider
@@ -30,8 +30,10 @@ export default function ViewCourseContextProvider({ children }) {
         imagePreview,
         tags,
         sections,
+        setSections,
         firstLeaf,
         enrolled,
+        completed,
         path,
         openedSections,
         checkCertificate,

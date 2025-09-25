@@ -2,7 +2,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from "react";
 import YouTube from "react-youtube";
 import styles from "./youtubePlayer.module.css";
 
-const YouTubePlayer = forwardRef(({ videoId }, ref) => {
+const YouTubePlayer = forwardRef(({ videoId, time = 0 }, ref) => {
   const playerRef = useRef(null);
 
   useImperativeHandle(ref, () => ({
@@ -17,7 +17,7 @@ const YouTubePlayer = forwardRef(({ videoId }, ref) => {
         videoId={videoId}
         onReady={(e) => (playerRef.current = e.target)}
         opts={{
-          playerVars: { modestbranding: 1, controls: 1 },
+          playerVars: { modestbranding: 1, controls: 1, start: time },
         }}
       />
     </div>

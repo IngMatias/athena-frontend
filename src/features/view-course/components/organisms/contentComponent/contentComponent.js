@@ -8,6 +8,7 @@ import MultipleChoiceContent from "@/features/create-course/components/molecules
 import TextContent from "../../atoms/textContent/textContent";
 import TrueFalseContent from "../../molecules/trueFalseContent/trueFalseContent";
 import { postAnswer } from "@/services/course.service";
+import VideoContent from "../../molecules/videoContent/videoContent";
 
 export default function ContentComponent({
   index,
@@ -30,10 +31,16 @@ export default function ContentComponent({
   };
 
   return (
-    <div className={styles.contentComponent}>
+    <div className={
+    content.type === ContentType.TEXT || content.type === ContentType.VIDEO
+      ? ""
+      : styles.contentComponent}>
       <div>
         {content.type === ContentType.TEXT && (
           <TextContent text={content.text} />
+        )}
+        {content.type === ContentType.VIDEO && (
+          <VideoContent text={content.text} />
         )}
         {content.type === ContentType.MINDMAP && (
           <MindMapContent
@@ -63,11 +70,11 @@ export default function ContentComponent({
           />
         )}
         {[ContentType.TRUE_FALSE].includes(content.type) && (
-          <div>
+          <div className={styles.correct}>
             {!completed && !content.result && <button onClick={handleCheck}>Corregir</button>}
-            <div>
+            <div className={styles.correctAnswer}>
               {content.result != undefined &&
-                (content.result ? "Correct Answer" : "Wrong Answer")}
+                (content.result ? 'Exacto, sigue así 🚀' : "Casi, inténtalo otra vez 💪")}
             </div>
           </div>
         )}

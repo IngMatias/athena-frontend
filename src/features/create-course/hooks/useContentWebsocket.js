@@ -47,6 +47,18 @@ export const useContentWebsocket = () => {
       });
     });
 
+    socket.on("add-video", (i, id) => {
+      setContent((oldContent) => {
+        const newContent = JSON.parse(JSON.stringify(oldContent));
+        newContent.splice(parseInt(i) + 1, 0, {
+          id,
+          type: "VIDEO",
+          text: "",
+        });
+        return newContent;
+      });
+    });
+
     socket.on("init-add-mind-map-at", (ids) => {
       MindMapJSONBuffer.init();
 
@@ -109,17 +121,6 @@ export const useContentWebsocket = () => {
           return newContent;
         });
         return oldContent;
-      });
-    });
-
-    socket.on("add-video-at", (i, url) => {
-      setContent((oldContent) => {
-        const newContent = JSON.parse(JSON.stringify(oldContent));
-        newContent.splice(parseInt(i) + 1, 0, {
-          type: "VIDEO",
-          url: url,
-        });
-        return newContent;
       });
     });
 
@@ -204,10 +205,8 @@ export const useContentWebsocket = () => {
     socket.emit("add-empty-text", courseId, sectionId, i);
   };
 
-  const addYouTubeVideoAt = (i, { url }) => {
-    socket.emit("add-video-at", courseId, sectionId, i, {
-      url
-    });
+  const addYouTubeVideoAt = (i) => {
+    socket.emit("add-video", courseId, sectionId, i);
   }
 
   const setContentAt = (i, content) => {

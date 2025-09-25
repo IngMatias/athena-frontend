@@ -1,0 +1,18 @@
+.videoContent {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  resize: none;
+  
+  outline: none;
+  border: none;
+  border-radius: var(--primary-border-radius);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.videoContent:hover {
+  background-color: var(--tertiary-background-color);
+}

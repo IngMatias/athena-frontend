@@ -58,9 +58,12 @@ export default function SimpleChat() {
       <div className={styles.chatFooter}>
         <input
           className={styles.input}
-          placeholder="Enter a message"
+          placeholder="Pregunta lo que quieras"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleChat(e.target.value);
+          }}
         />
 
         <div className={styles.actions}>

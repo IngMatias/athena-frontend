@@ -57,7 +57,9 @@
 
 .completedContainer {
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
   padding: 1rem;
   margin: 1rem;
   border-radius: var(--primary-border-radius);
@@ -69,11 +71,20 @@
 
 .completedButton {
   cursor: pointer;
+  color: var(--link-primary-color);
+  background-color: transparent;
+  border: none;
+  font: var(--primary-medium-font);
+  &:hover {
+    color: var(--link-primary-hover-color);
+  }
 }
 
 .sections {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 0 0.5rem;
 }
 
 .certificateSection {

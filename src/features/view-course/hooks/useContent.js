@@ -1,8 +1,9 @@
 import { getCourseContent, postAnswer } from "@/services/course.service";
+import { updateCompleted } from "@/utils/sections";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
-export const useContent = () => {
+export const useContent = ({setSections}) => {
   const params = useParams();
   const { courseId, sectionId } = params;
 
@@ -25,13 +26,20 @@ export const useContent = () => {
 
   const checkAnswerAt = (i) => {
     const { id: contentId, answer: answerTry } = content[i];
-    postAnswer({ courseId, sectionId, contentId, answerTry }).then(
+    return postAnswer({ courseId, sectionId, contentId, answerTry }).then(
       ({ result }) => {
         setContent((oldContent) => {
           const content = JSON.parse(JSON.stringify(oldContent));
           content[i].result = result;
           return content;
         });
+        if (result)
+          setSections((sections) => {
+            const newSections = JSON.parse(JSON.stringify(sections));
+            updateCompleted(newSections, sectionId, 1)
+
+            return newSections
+          })
       }
     );
   };

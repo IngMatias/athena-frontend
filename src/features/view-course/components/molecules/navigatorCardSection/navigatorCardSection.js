@@ -2,6 +2,7 @@ import ButtonCollapse from "@/features/create-course/components/atoms/buttonColl
 import NavigatorSections from "../../organisms/navigatorSections/navigatorSections";
 
 import styles from "./navigatorCardSection.module.css";
+import { useEffect } from "react";
 
 export default function NavigatorCardSection({
   section,
@@ -44,6 +45,7 @@ export default function NavigatorCardSection({
                 onClick={() => onToggleCollapse(section.id)}
               >
                 {section.title}
+                  <span className={styles.percentage}>{section.total? Math.round((section.completed / section.total) * 100) : 100}%</span>
               </button>
             )}
             {isLeaf && (
@@ -53,6 +55,7 @@ export default function NavigatorCardSection({
                   onClick={() => onSelectSection(section.id)}
                 >
                   {section.title}
+                  <span className={styles.percentage}>{section.total? Math.round((section.completed / section.total) * 100) : 100}%</span>
                 </button>
               </>
             )}

@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import { useContext } from "react";
 import styles from "./styles.module.css";
+import ButtonLink from "@/components/atoms/buttonLink/buttonLink";
 
 export default function Home() {
   const params = useParams();
@@ -26,7 +27,12 @@ export default function Home() {
     toggleSectionOpen,
   } = useContext(ViewCourseContext);
 
-  const { visitSection } = useViewCoursePath();
+  const { visitSection, prev } = useViewCoursePath();
+
+  
+  const handlePrevious = () => {
+    prev();
+  };
 
 
   const handleContinue = () => {
@@ -35,44 +41,51 @@ export default function Home() {
 
   return (
     <div className="section">
-      <div
-        style={{ position: "relative", width: "20rem", aspectRatio: "16/9" }}
-      >
-        {imagePreview && (
-          <Image
-            src={imagePreview}
-            alt="Imagen"
-            fill
-            style={{ objectFit: "cover" }}
-            sizes="100vw"
-            unoptimized
-          />
-        )}
-      </div>
+      <div className={styles.courseInfoPage}>
+        <div className={styles.courseBanner}
+        >
+          {imagePreview && (
+            <Image
+              src={imagePreview}
+              alt="Imagen"
+              fill
+              priority
+              className={styles.courseBannerImage}
+            />
+          )}
+        </div>
+        <div className={styles.courseContent}>
+          <h1>{title}</h1>
 
-      <h1>{title}</h1>
+          <div className={styles.courseInfo}>
+            <div className={styles.sectionsInfo}>
+              <TreeSections
+                sections={sections}
+                openedSections={openedSections}
+                onToggleCollapse={toggleSectionOpen}
+              />
+            </div>
 
-      <div style={{ display: "grid", gridTemplateColumns: "60% 40%" }}>
-        <div>
-          <TreeSections
-            sections={sections}
-            openedSections={openedSections}
-            onToggleCollapse={toggleSectionOpen}
-          />
+            <div className={styles.description}>
+              <div className={styles.subtitle} >Resumen</div>
+              <div>{description}</div>
+
+              <div className={styles.subtitle}>Habilidades que obtendrás</div>
+              <div className={styles.tags}>{tags.map((t) => (
+                <div key={t.id} className={styles.tag}>
+                  {t.label}
+                </div>
+              ))}</div>
+            </div>
+          </div>
+        </div>
+        <div className="section-actions">
+
         </div>
 
-        <div className={styles.description}>
-          <div className={styles.subtitle} >Resumen</div>
-          <div>{description}</div>
-
-          <div className={styles.subtitle}>Habilidades que obtendrás</div>
-          <div className={styles.tags}>{tags.map((t) => (
-            <div key={t.id} className={styles.tag}>
-              {t.label}
-            </div>
-          ))}</div>
-
+        <div className="section-actions">
           <div>
+            <ButtonLink onClick={handlePrevious} label="Anterior" />
             {!enrolled && (
               <ButtonPrimary label="Enroll Course" onClick={handleEnroll} />
             )}

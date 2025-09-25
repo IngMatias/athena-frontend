@@ -14,7 +14,7 @@ const CHAT_ROLE = {
   assistant: "assistant",
 };
 
-export default function DocumentChat() {
+export default function DocumentChat( {allowLoading = true} ) {
   const params = useParams();
   const { courseId } = params;
 
@@ -49,6 +49,11 @@ export default function DocumentChat() {
     });
 
     setMessage((message) => {
+      
+      console.log(files)
+      console.log(files.filter((f) => f.selected).map((f) => f.id))
+      console.log(message)
+
       postChatDocuments({
         filesIds: files.filter((f) => f.selected).map((f) => f.id),
         message,
@@ -73,11 +78,11 @@ export default function DocumentChat() {
 
   return (
     <div className={styles.documentChat}>
-      <div className={styles.chatHeader}>
+      { allowLoading && <div className={styles.chatHeader}>
         <button onClick={handleFile} className={styles.chatButton}>
           <span className="material-symbols-outlined">description</span>
         </button>
-      </div>
+      </div>}
 
       <div className={styles.messages}>
         {messages.map((m, i) => (
@@ -108,7 +113,7 @@ export default function DocumentChat() {
                   className={styles.refButton}
                   onClick={() => handleReferences(m)}
                 >
-                  References
+                  Referencias
                 </button>
               </div>
             )}
@@ -119,9 +124,12 @@ export default function DocumentChat() {
       <div className={styles.chatFooter}>
         <input
           className={styles.input}
-          placeholder="Enter a message"
+          placeholder="Pregunta lo que quieras"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleChat(e.target.value);
+          }}
         />
 
         <div className={styles.actions}>

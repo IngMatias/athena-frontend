@@ -24,5 +24,17 @@ export const useViewCoursePath = () => {
       router.push(`/course/${courseId}/section/${sectionId}/view`);
   };
 
-  return { start, visitSection };
+  const prev = () => {
+    const previousKey = Object.keys(nextPath).find(
+      (key) => nextPath[key] === normalizePath(pathname)
+    );
+
+    const prevRoute =
+      previousKey === "" ? "/" : denormalizePath(previousKey, courseId);
+
+    router.push(prevRoute);
+  };
+
+
+  return { start, visitSection, prev };
 };

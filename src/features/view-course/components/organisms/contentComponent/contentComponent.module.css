@@ -1,0 +1,14 @@
+.correctAnswer {
+  font: var(--primary-medium-font);
+}
+
+
+.contentComponent {
+  box-shadow: 0 0 0 1px #d1d2e0, 0 2px 4px #06117614, 0 4px 12px #06117614;
+  border-radius: var(--primary-border-radius);
+  margin: 1rem;
+}
+
+.correct {
+  padding: 1rem;
+}
