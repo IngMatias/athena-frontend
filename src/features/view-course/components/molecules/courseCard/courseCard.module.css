@@ -35,7 +35,6 @@
 
 .title {
   height: 2.5em;
-  line-height: 1.5em;
 
   display: -webkit-box;
   -webkit-line-clamp: 2;
