@@ -59,7 +59,7 @@ export default function TitleQuestions({ initTitle, setTitle }) {
         <div className="modal-title-questions">
           <div>
             <div className="title">
-              <div>Generated Title:</div>
+              <div>Título generado:</div>
               <div>{title}</div>
             </div>
 
@@ -85,7 +85,7 @@ export default function TitleQuestions({ initTitle, setTitle }) {
 
               <ButtonPrimary
                 onClick={handleFinish}
-                label="Acepetar Titulo"
+                label="Acpetar Titulo"
               ></ButtonPrimary>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function TitleQuestions({ initTitle, setTitle }) {
                   onClick={() => handleSelect(i)}
                 >
                   <div>{q.question}</div>
-                  <div>Answer: {q.answer}</div>
+                  <div>Respuesta: {q.answer}</div>
                 </div>
               </div>
             ))}

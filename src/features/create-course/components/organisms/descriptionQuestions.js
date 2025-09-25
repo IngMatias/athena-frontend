@@ -58,7 +58,7 @@ export default function DescriptionQuestions({ initDescription, setDescription }
         <div className="modal-title-questions">
           <div>
             <div className="header">
-              <div>Generated Description:</div>
+              <div>Descripcion Generada:</div>
               <div className="generated-description">{description}</div>
             </div>
 
@@ -84,7 +84,7 @@ export default function DescriptionQuestions({ initDescription, setDescription }
 
               <ButtonPrimary
                 onClick={handleFinish}
-                label="Acepetar Titulo"
+                label="Aceptar Titulo"
               ></ButtonPrimary>
             </div>
           </div>

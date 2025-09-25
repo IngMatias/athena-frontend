@@ -126,16 +126,16 @@ export default function ContentCreator() {
           onClick={() => handleAddEmptyText({ index: -1 })}
           icon="text_snippet"
         >
-          Add Empty Text
+          Agregar texto vacío
         </IconTooltip>
         <IconTooltip onClick={() => handleGenerateKeyPoints()} icon="key">
-          Generate <i>keypoints</i> based on title
+          Generar <i>keypoints</i> basados en el título
         </IconTooltip>
         <IconTooltip
           onClick={() => handleAddYouTubeVideo({ index: -1 })}
           icon="youtube_activity"
         >
-          Add <i>YouTube</i> video
+          Añadir video de <i>YouTube</i>
         </IconTooltip>
       </div>
 
@@ -165,11 +165,11 @@ export default function ContentCreator() {
           onClick={handleAddMultipleChoiceWithSelected}
           icon="radio_button_checked"
         >
-          Generate Multiple Choice based on selected text.
+          Generar Múltiple Opcion basado en el texto seleccionado.
         </IconTooltip>
 
         <IconTooltip onClick={handleAddTrueFalseWithSelected} icon="rule">
-          Generate True False based on selected text.
+          Generar Verdadero Falso basado en el texto seleccionado.
         </IconTooltip>
       </FollowMouseBox>
     </div>

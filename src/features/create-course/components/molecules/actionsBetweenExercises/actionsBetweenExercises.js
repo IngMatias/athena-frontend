@@ -14,28 +14,28 @@ export default function ActionsBetweenExercises({
   return (
     <div className={styles.actionsBetweenExercises}>
       <IconTooltip onClick={onAddEmptyText} icon="text_snippet">
-        Add Empty Text
+        Agregar texto vacío
       </IconTooltip>
 
       {ContentType.TEXT === type && (
         <>
           <IconTooltip onClick={onElaborateMore} icon="more">
-            Expand text
+            Expandir texto
           </IconTooltip>
 
           <IconTooltip onClick={onAddTrueFalse} icon="rule">
-            Generate True False based on upper text.
+            Generar Verdadero Falso basado en el texto.
           </IconTooltip>
 
           <IconTooltip
             onClick={onAddMultipleChoice}
             icon="radio_button_checked"
           >
-            Generate Multiple Choice based on upper text.
+            Generar Múltiple Opcion basado en el texto.
           </IconTooltip>
 
           <IconTooltip onClick={onAddMindMap} icon="account_tree">
-            Generate MindMap based on upper text.
+            Generar Mapa Mental basado en el texto.
           </IconTooltip>
         </>
       )}
