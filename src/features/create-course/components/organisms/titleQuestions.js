@@ -85,7 +85,7 @@ export default function TitleQuestions({ initTitle, setTitle }) {
 
               <ButtonPrimary
                 onClick={handleFinish}
-                label="Acpetar Titulo"
+                label="Aceptar Titulo"
               ></ButtonPrimary>
             </div>
           </div>
